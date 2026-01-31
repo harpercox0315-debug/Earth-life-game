@@ -28,6 +28,32 @@
     </div>
 
     <script>
+        // --- Movement Controls ---
+const moveSpeed = 0.1;
+const keys = {};
+
+// Track which keys are being pressed
+window.addEventListener('keydown', (e) => keys[e.key.toLowerCase()] = true);
+window.addEventListener('keyup', (e) => keys[e.key.toLowerCase()] = false);
+
+function updateMovement() {
+    if (keys['w']) player.position.y += moveSpeed;
+    if (keys['s']) player.position.y -= moveSpeed;
+    if (keys['a']) player.position.x -= moveSpeed;
+    if (keys['d']) player.position.x += moveSpeed;
+}
+
+// Now, update your animate function to include movement:
+function animate() {
+    requestAnimationFrame(animate);
+    
+    updateMovement(); // Run the movement check every frame
+    
+    player.rotation.x += 0.01;
+    player.rotation.y += 0.01;
+    
+    renderer.render(scene, camera);
+}
         /* JS stays inside here now! */
         function changeEra(year) {
             document.getElementById('era-display').innerText = year;

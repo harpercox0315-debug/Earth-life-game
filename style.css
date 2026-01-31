@@ -1,0 +1,79 @@
+/* General Game Setup */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #1a1a1a;
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* The UI Layer - This sits on top of your 3D Map */
+#ui-layer {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 100;
+    padding: 20px;
+    border-radius: 15px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px); /* Modern 2026 Glass Effect */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    width: 250px;
+}
+
+/* 1990s Retro Style (We'll trigger this with a Class) */
+.retro-ui {
+    background: #c0c0c0 !important; /* Classic Windows 95 Gray */
+    border: 3px outset #ffffff !important;
+    color: #000 !important;
+    font-family: "Times New Roman", Times, serif !important;
+}
+
+/* Buttons - The "Sims" clickable feel */
+button {
+    width: 100%;
+    margin-top: 10px;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(145deg, #3a3a3a, #222);
+    color: #00ffcc; /* 2026 Tech Glow */
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: 0.3s;
+    cursor: pointer;
+    border: 1px solid #00ffcc;
+}
+
+button:hover {
+    transform: scale(1.05);
+    background: #00ffcc;
+    color: #000;
+    box-shadow: 0 0 15px #00ffcc;
+}
+
+/* Retro Button Override */
+.retro-ui button {
+    background: #c0c0c0 !important;
+    color: #000 !important;
+    border: 2px outset #ffffff !important;
+    border-radius: 0 !important;
+    text-transform: none !important;
+    font-weight: normal !important;
+}
+
+.retro-ui button:active {
+    border: 2px inset #ffffff !important;
+}
+
+/* The 3D Canvas area */
+#gameCanvas {
+    width: 100vw;
+    height: 100vh;
+    display: block;
+}

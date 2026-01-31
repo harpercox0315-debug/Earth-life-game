@@ -1,1 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Life Basis: Earth-life-game</title>
+    <style>
+        body { margin: 0; background-color: #000; color: white; font-family: sans-serif; overflow: hidden; }
+        #ui-layer { position: absolute; top: 20px; left: 20px; z-index: 10; }
+        button { padding: 10px; cursor: pointer; background: #333; color: white; border: 1px solid #fff; }
+    </style>
+</head>
+<body>
 
+    <div id="ui-layer">
+        <h1>Life Basis</h1>
+        <p>Current Era: <span id="era-display">2026</span></p>
+        <button onclick="changeEra('1990')">Go to 1990</button>
+        <button onclick="changeEra('2026')">Go to 2026</button>
+        <hr>
+        <p>Role: <span id="role-display">Human</span></p>
+        <button onclick="setRole('Dog')">Become Dog</button>
+    </div>
+
+    <canvas id="gameCanvas"></canvas>
+
+    <script>
+        function changeEra(year) {
+            document.getElementById('era-display').innerText = year;
+            alert("Time Machine warping to " + year + "!");
+        }
+
+        function setRole(role) {
+            document.getElementById('role-display').innerText = role;
+            alert("You are now playing as a " + role + "!");
+        }
+    </script>
+</body>
+</html>

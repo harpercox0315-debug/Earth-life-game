@@ -66,6 +66,14 @@ function animate() {
         }
 
         function setRole(role) {
+            <hr>
+<div style="text-align: left; font-size: 0.8em;">
+    <p>Health: <span id="health-val">100</span>%</p>
+    <div style="width: 100%; background: #444; height: 10px; border-radius: 5px;">
+        <div id="health-bar" style="width: 100%; background: #00ffcc; height: 100%; border-radius: 5px;"></div>
+    </div>
+    <p>Coins: $<span id="coin-val">0</span></p>
+</div>
             document.getElementById('role-display').innerText = role;
             alert("You are now a " + role + "!");
         }

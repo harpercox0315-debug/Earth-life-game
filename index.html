@@ -4,29 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Life Basis | Earth-Life-Game</title>
-    <link rel="stylesheet" href="./style.css">
+    <style>
+        /* CSS stays inside here now! */
+        body { margin: 0; padding: 0; background-color: #1a1a1a; color: white; font-family: sans-serif; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
+        #ui-layer { padding: 20px; border-radius: 15px; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(10px); border: 2px solid #00ffcc; width: 300px; text-align: center; }
+        .retro-ui { background: #c0c0c0 !important; border: 4px outset #fff !important; color: #000 !important; }
+        .retro-ui button { background: #c0c0c0 !important; color: #000 !important; border: 2px outset #fff !important; border-radius: 0 !important; }
+        button { width: 100%; margin: 10px 0; padding: 12px; border-radius: 8px; background: #333; color: #00ffcc; font-weight: bold; border: 1px solid #00ffcc; cursor: pointer; }
+    </style>
 </head>
 <body>
 
     <div id="ui-layer">
-        <h1>Life Basis</h1>
+        <h1>LIFE BASIS</h1>
         <p>Year: <span id="era-display">2026</span></p>
         <button onclick="changeEra('1990')">Warp to 1990</button>
         <button onclick="changeEra('2026')">Back to 2026</button>
-        
         <hr>
-        
         <p>Role: <span id="role-display">Human</span></p>
         <button onclick="setRole('Dog')">Play as Pet</button>
         <button onclick="setRole('Human')">Play as Human</button>
-        
-        <hr>
-        
-        <button onclick="rebirthPlayer()" style="background: red; border-color: white;">REBIRTH</button>
     </div>
 
-    <canvas id="gameCanvas"></canvas>
+    <script>
+        /* JS stays inside here now! */
+        function changeEra(year) {
+            document.getElementById('era-display').innerText = year;
+            const ui = document.getElementById('ui-layer');
+            if (year === '1990') {
+                ui.classList.add('retro-ui');
+            } else {
+                ui.classList.remove('retro-ui');
+            }
+        }
 
-   <script src="./script.js"></script>
+        function setRole(role) {
+            document.getElementById('role-display').innerText = role;
+            alert("You are now a " + role + "!");
+        }
+    </script>
 </body>
 </html>
+

@@ -63,3 +63,29 @@ function rebirthPlayer() {
     alert("Rebirthing... Choose your new era and start your life over!");
     // Later we will add code here to move your 3D character to a random spot
 }
+/* 1. First, we tell the game to load the 3D Engine */
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('gameCanvas') });
+
+// This sets the background to a dark "Huber Heights at Night" vibe
+scene.background = new THREE.Color(0x0a0a0a); 
+
+/* 2. Add a 'Placeholder' for your character (A Green Cube for now) */
+const geometry = new THREE.BoxGeometry(1, 1, 1);
+const material = new THREE.MeshBasicMaterial({ color: 0x00ffcc });
+const player = new THREE.Mesh(geometry, material);
+scene.add(player);
+
+camera.position.z = 5;
+
+/* 3. The Animation Loop (The Heartbeat of the game) */
+function animate() {
+    requestAnimationFrame(animate);
+    
+    // Make the player spin a little so we know the game is 'alive'
+    player.rotation.y += 0.01;
+    
+    renderer.render(scene, camera);
+}
+animate();

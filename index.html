@@ -27,7 +27,34 @@
         <button onclick="setRole('Human')">Play as Human</button>
     </div>
 
-    <script>
+    <script> 
+        // --- The Ground (The Streets) ---
+const floorGeometry = new THREE.PlaneGeometry(100, 100);
+const floorMaterial = new THREE.MeshStandardMaterial({ color: 0x222222 }); // Dark Asphalt Gray
+const floor = new THREE.Mesh(floorGeometry, floorMaterial);
+floor.rotation.x = -Math.PI / 2; // Lay it flat
+floor.position.y = -1; // Put it under the player
+scene.add(floor);
+
+// Add a Grid so we can see movement better
+const grid = new THREE.GridHelper(100, 50, 0x00ffcc, 0x444444);
+grid.position.y = -0.99; 
+scene.add(grid);
+        // --- The Kroger Building ---
+const krogerGeo = new THREE.BoxGeometry(4, 8, 4); // 4 wide, 8 tall
+const krogerMat = new THREE.MeshStandardMaterial({ color: 0x4444ff }); // Blue building
+const kroger = new THREE.Mesh(krogerGeo, krogerMat);
+
+// Place it at the end of the street
+kroger.position.set(0, 3, -15); 
+scene.add(kroger);
+
+// Add a "Sign" (A smaller glowing box on top)
+const signGeo = new THREE.BoxGeometry(2, 1, 0.5);
+const signMat = new THREE.MeshBasicMaterial({ color: 0xff0000 }); // Glowing Red
+const sign = new THREE.Mesh(signGeo, signMat);
+sign.position.set(0, 7, -13);
+scene.add(sign);
         // --- Movement Controls ---
 const moveSpeed = 0.1;
 const keys = {};
@@ -41,6 +68,16 @@ function updateMovement() {
     if (keys['s']) player.position.y -= moveSpeed;
     if (keys['a']) player.position.x -= moveSpeed;
     if (keys['d']) player.position.x += moveSpeed;
+} // Example: If the player gets close to a specific spot, they get a coin
+function checkCollection() {
+    // We will place a coin at position (2, 0, 0)
+    if (player.position.distanceTo(new THREE.Vector3(2, 0, 0)) < 1) {
+        playerStats.coins += 10;
+        document.getElementById('coin-val').innerText = playerStats.coins;
+        alert("You found 10 coins outside Kroger!");
+        // Reset player position so they don't spam the coins
+        player.position.set(0,0,0); 
+    }
 }
 
 // Now, update your animate function to include movement:
@@ -56,6 +93,21 @@ function animate() {
 }
         /* JS stays inside here now! */
         function changeEra(year) {
+            function changeEra(year) {
+    playerStats.currentYear = year;
+    document.getElementById('era-display').innerText = year;
+    const ui = document.getElementById('ui-layer');
+    
+    if (year === '1990') {
+        ui.classList.add('retro-ui');
+        scene.background = new THREE.Color(0x331100); // Sepia/Old Photo vibe
+        player.material.color.setHex(0xffaa00); // Retro Orange Player
+    } else {
+        ui.classList.remove('retro-ui');
+        scene.background = new THREE.Color(0x0a0a0a); // Modern Dark
+        player.material.color.setHex(0x00ffcc); // Neon 2026 Player
+    }
+}
             document.getElementById('era-display').innerText = year;
             const ui = document.getElementById('ui-layer');
             if (year === '1990') {
@@ -66,6 +118,21 @@ function animate() {
         }
 
         function setRole(role) {
+            function setRole(role) {
+    document.getElementById('role-display').innerText = role;
+    
+    if (role === 'Dog') {
+        // Make the cube short and long like a dog
+        player.scale.set(1.5, 0.5, 0.8); 
+        player.material.color.setHex(0x964B00); // Brown color
+        alert("Woof! You are now a Dog. Everything looks bigger from down here!");
+    } else {
+        // Reset to Human (Tall neon cube)
+        player.scale.set(1, 1, 1);
+        player.material.color.setHex(0x00ffcc); // Back to Neon Green
+        alert("You are back to being a Human.");
+    }
+}
             <hr>
 <div style="text-align: left; font-size: 0.8em;">
     <p>Health: <span id="health-val">100</span>%</p>

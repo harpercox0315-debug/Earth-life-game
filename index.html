@@ -29,11 +29,19 @@
     <canvas id="gameCanvas"></canvas>
 
     <script>
+      
         // --- THE SIMS DIAMOND (Plumbob) ---
 const diamondGeo = new THREE.OctahedronGeometry(0.3, 0); // Diamond shape
 const diamondMat = new THREE.MeshStandardMaterial({ color: 0x00ff00, emissive: 0x00ff00 });
 const plumbob = new THREE.Mesh(diamondGeo, diamondMat);
 scene.add(plumbob);
+        // ... after Kroger code ...
+scene.add(sign); 
+
+// PASTE TARGET HERE
+const targetGeo = new THREE.BoxGeometry(6, 4, 4);
+// ... and so on ...
+scene.add(target);
 
 // To make the diamond follow you, add this inside your animate() function:
 // plumbob.position.set(player.position.x, player.position.y + 1.5, player.position.z);
